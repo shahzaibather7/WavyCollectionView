@@ -6,9 +6,14 @@
 //  Copyright © 2017 Mohammad Shahzaib Ather. All rights reserved.
 //
 
+#import "CustomCollectionViewCell.h"
+#import "CustomFlowLayout.h"
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UICollectionViewDataSource , UICollectionViewDelegate>
+
+@property UICollectionView* myCollectionView;
+
 
 @end
 
@@ -16,7 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    
+   // CustomFlowLayout *flowLayout = [[CustomFlowLayout alloc] init];
+    
 }
 
 
@@ -25,5 +34,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CustomCollectionViewCell *customCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
+    
+    [customCell configureCellWithName:[NSString stringWithFormat:@"cell:%li", (long)indexPath.row]];
+    
+    return customCell;
+}
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 13;
+}
+
+
+
 
 @end
+
